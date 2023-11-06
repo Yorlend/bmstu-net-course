@@ -1,3 +1,5 @@
 #pragma once
 
-int start_server(int port);
+void init_server(const char* ip_address, int port);
+
+int run_server(void);

@@ -2,5 +2,7 @@
 
 int main(void)
 {
-    start_server(8080);
+    init_server("127.0.0.1", 8080);
+    
+    return run_server();
 }
