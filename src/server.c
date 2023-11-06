@@ -47,6 +47,11 @@ int run_server(void)
         return EXIT_FAILURE;
     }
 
+    if (setsockopt(server_socket_fd, SOL_SOCKET, SO_REUSEADDR, &(int){1}, sizeof(int)) == -1) {
+        perror("setsockopt");
+        return EXIT_FAILURE;
+    }
+
     if (bind(server_socket_fd, (struct sockaddr*)&server.addr, sizeof(server.addr)) == -1) {
         perror("bind");
         return EXIT_FAILURE;

@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Iinc
+CFLAGS = -Iinc -g -ggdb
 SRC = $(wildcard src/*.c)
 OBJ = $(SRC:src/%.c=build/%.o)
 
