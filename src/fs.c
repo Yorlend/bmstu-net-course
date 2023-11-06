@@ -48,7 +48,10 @@ int send_text_file(int socket_fd, const char *filename)
 {
     int fd = open(filename, O_RDONLY);
     if (fd == -1)
+    {
+        perror("open");
         return EXIT_FAILURE;
+    }
     
     char buffer[TRANSFER_BUFFER_SIZE];
     size_t len;
@@ -56,6 +59,7 @@ int send_text_file(int socket_fd, const char *filename)
     {
         if (send(socket_fd, buffer, len, 0) < 0)
         {
+            perror("send");
             close(fd);
             return EXIT_FAILURE;
         }

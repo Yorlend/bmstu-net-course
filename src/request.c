@@ -32,8 +32,8 @@ static void respond_text_file(int client_socket, const char* path)
     char response_buffer[RESPONSE_BUFFER_SIZE];
     snprintf(response_buffer, RESPONSE_BUFFER_SIZE,
         "HTTP/1.1 %d\r\n"
-        "Content-Length: %d\r\n"
-        "\r\n", HTTP_STATUS_OK, text_file_length(path));
+        //"Content-Length: %d\r\n"
+        "\r\n", HTTP_STATUS_OK); // , text_file_length(path));
     
     send(client_socket, response_buffer, strlen(response_buffer), 0);
     if (send_text_file(client_socket, path) != EXIT_SUCCESS)
