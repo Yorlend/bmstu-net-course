@@ -9,9 +9,11 @@
 #include "fs.h"
 #include "http_status_codes.h"
 #include "request.h"
+#include "security.h"
 
 #define REQUEST_BUFFER_SIZE 4096
 #define RESPONSE_BUFFER_SIZE 4096
+#define FILEPATH_BUFFER_SIZE 512
 
 static void respond_error(int client_socket, int status, const char* message)
 {
@@ -66,7 +68,13 @@ void handle_request(int client_socket_fd)
         respond_error(client_socket_fd, HTTP_STATUS_BAD_REQUEST, "bad request");
     }
     else
-        respond_text_file(client_socket_fd, request.uri);
+    {
+        char filepath_buffer[FILEPATH_BUFFER_SIZE];
+        getcwd(filepath_buffer, FILEPATH_BUFFER_SIZE);
+        join_paths_secure(filepath_buffer, FILEPATH_BUFFER_SIZE, filepath_buffer, request.uri);
+
+        respond_text_file(client_socket_fd, filepath_buffer);
+    }
 
     close(client_socket_fd);
 }
