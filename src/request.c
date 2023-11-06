@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include "fs.h"
 #include "http_status_codes.h"
 #include "request.h"
 
@@ -24,10 +25,24 @@ static void respond_error(int client_socket, int status, const char* message)
     send(client_socket, response_buffer, strlen(response_buffer), 0);
 }
 
+static void respond_text_file(int client_socket, const char* path)
+{
+    char response_buffer[RESPONSE_BUFFER_SIZE];
+    snprintf(response_buffer, RESPONSE_BUFFER_SIZE,
+        "HTTP/1.1 %d\r\n"
+        "Content-Length: %d\r\n"
+        "\r\n", HTTP_STATUS_OK, text_file_length(path));
+    
+    send(client_socket, response_buffer, strlen(response_buffer), 0);
+    if (send_text_file(client_socket, path) != EXIT_SUCCESS)
+        fprintf(stderr, "failed to send text file at %s\n", path);
+}
+
 void handle_request(int client_socket_fd)
 {
     char request_buffer[REQUEST_BUFFER_SIZE];
     struct request request;
+    parse_status_t parse_status;
 
     int bytes_received = recv(client_socket_fd, request_buffer, REQUEST_BUFFER_SIZE, 0);
     if (bytes_received == -1)
@@ -45,14 +60,13 @@ void handle_request(int client_socket_fd)
         fprintf(stderr, "received too many bytes\n");
         respond_error(client_socket_fd, HTTP_STATUS_BAD_REQUEST, "bad request");        
     }
-    else
+    else if ((parse_status = parse_request(&request, request_buffer)) != PARSE_SUCCESS)
     {
-        parse_status_t parse_status = parse_request(&request, request_buffer);
-        if (parse_status != PARSE_SUCCESS)
-            respond_error(client_socket_fd, parse_status, "bad request");
-        else
-            respond_error(client_socket_fd, HTTP_STATUS_OK, "ok");
+        fprintf(stderr, "parse request failed with code: %d\n", parse_status);
+        respond_error(client_socket_fd, HTTP_STATUS_BAD_REQUEST, "bad request");
     }
+    else
+        respond_text_file(client_socket_fd, request.uri);
 
     close(client_socket_fd);
 }
