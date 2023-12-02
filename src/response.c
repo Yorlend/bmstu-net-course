@@ -26,7 +26,10 @@ struct response create_response(http_version_t version, int status)
 
     time_t now = time(NULL);
     struct tm* now_tm = gmtime(&now);
-    add_header(&response, "Date", asctime(now_tm));
+
+    char asctime_buf[64];
+    strftime(asctime_buf, sizeof(asctime_buf), "%Y-%m-%d %H:%M:%S", now_tm);
+    add_header(&response, "Date", asctime_buf);
 
     return response;
 }

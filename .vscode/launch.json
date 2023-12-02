@@ -11,7 +11,7 @@
             "program": "${workspaceFolder}/build/app",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/static",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",

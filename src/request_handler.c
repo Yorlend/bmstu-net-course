@@ -11,6 +11,7 @@
 #include "security.h"
 #include "request_handler.h"
 #include "response.h"
+#include "mime_types.h"
 
 #define FILEPATH_BUFFER_SIZE 512
 #define RESPONSE_BUFFER_SIZE 4096
@@ -27,6 +28,8 @@ static void respond_text_file(int client_socket, const char* path)
     else
     {
         struct response response = create_response(HTTP_1_1, HTTP_STATUS_OK);
+        add_header(&response, "Content-Type", mime_type_str(mime_type_from_path(path)));
+        print_header(&response, "Content-Length: %zu", text_file_length(path));
         set_body_writer(&response, text_file_writer, (char*)path);
         
         if (send_response(client_socket, &response) != EXIT_SUCCESS)
@@ -41,7 +44,8 @@ static void respond_file_head(int client_socket, const char* path)
     else
     {
         struct response response = create_response(HTTP_1_1, HTTP_STATUS_OK);
-        print_header(&response, "Content-Length", text_file_length(path));
+        add_header(&response, "Content-Type", mime_type_str(mime_type_from_path(path)));
+        print_header(&response, "Content-Length: %zu", text_file_length(path));
         
         if (send_response(client_socket, &response) != EXIT_SUCCESS)
             LOG_ERROR("failed to send head of file at path=%s", path);

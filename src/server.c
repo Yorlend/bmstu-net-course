@@ -16,6 +16,9 @@
 #include "request_queue.h"
 #include "thread_pool.h"
 
+#define QUEUE_CAPACITY 10
+#define NUM_WORKER_THREADS 4
+
 static struct
 {
     struct sockaddr_in addr;
@@ -35,8 +38,8 @@ void init_server(const char* ip_address, int port)
     server.addr.sin_family = AF_INET;
     server.addr.sin_addr.s_addr = inet_addr(ip_address);
     server.addr.sin_port = htons(port);
-    server.queue_capacity = 10;
-    server.num_worker_threads = 4;
+    server.queue_capacity = QUEUE_CAPACITY;
+    server.num_worker_threads = NUM_WORKER_THREADS;
     server.running = false;
 }
 
