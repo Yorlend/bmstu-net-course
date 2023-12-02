@@ -48,21 +48,41 @@ static void respond_file_head(int client_socket, const char* path)
     }
 }
 
+static void handle_get(int client_socket, const struct request* request)
+{
+    if (strcmp(request->uri, "/") == 0)
+        respond_text_file(client_socket, "index.html");
+    else
+    {
+        char filepath_buffer[FILEPATH_BUFFER_SIZE];
+        getcwd(filepath_buffer, FILEPATH_BUFFER_SIZE);
+        join_paths_secure(filepath_buffer, FILEPATH_BUFFER_SIZE, filepath_buffer, request->uri);
+
+        respond_text_file(client_socket, filepath_buffer);
+    }
+}
+
+static void handle_head(int client_socket, const struct request* request)
+{
+    char filepath_buffer[FILEPATH_BUFFER_SIZE];
+    getcwd(filepath_buffer, FILEPATH_BUFFER_SIZE);
+    join_paths_secure(filepath_buffer, FILEPATH_BUFFER_SIZE, filepath_buffer, request->uri);
+
+    respond_file_head(client_socket, filepath_buffer);
+}
+
 void handle_request(int client_socket, struct request request)
 {
     LOG_INFO("%s %s %s", request_method_str(request.method), request.uri, http_version_str(request.http_version));
 
-    char filepath_buffer[FILEPATH_BUFFER_SIZE];
-    getcwd(filepath_buffer, FILEPATH_BUFFER_SIZE);
-    join_paths_secure(filepath_buffer, FILEPATH_BUFFER_SIZE, filepath_buffer, request.uri);
     switch (request.method)
     {
     case GET:
-        respond_text_file(client_socket, filepath_buffer);
+        handle_get(client_socket, &request);
         break;
     
     case HEAD:
-        respond_file_head(client_socket, filepath_buffer);
+        handle_head(client_socket, &request);
         break;
     
     default:
