@@ -75,7 +75,8 @@ int run_server(void)
     }
 
     server.running = true;
-    __sighandler_t old_handler = signal(SIGINT, interrupt_handler);
+    __sighandler_t old_int_handler = signal(SIGINT, interrupt_handler);
+    __sighandler_t old_pipe_handler = signal(SIGPIPE, SIG_IGN);
 
     LOG_INFO("server started at %s:%d", inet_ntoa(server.addr.sin_addr), ntohs(server.addr.sin_port));
 
@@ -113,7 +114,8 @@ int run_server(void)
         }
     }
 
-    signal(SIGINT, old_handler);
+    signal(SIGINT, old_int_handler);
+    signal(SIGPIPE, old_pipe_handler);
     close(server_socket_fd);
     free_all_request_jobs();
     destroy_thread_pool(thread_pool);

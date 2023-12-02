@@ -89,7 +89,8 @@ static int send_response_head(int client_socket, const struct response* response
         response->status,
         http_status_str(response->status));
     
-    if (send(client_socket, response_buffer, strlen(response_buffer), 0) == -1)
+    ssize_t sent = send(client_socket, response_buffer, strlen(response_buffer), 0);
+    if (sent == -1)
     {
         LOG_ERROR("send: %s", strerror(errno));
         return EXIT_FAILURE;
@@ -106,7 +107,8 @@ int send_response(int client_socket, const struct response* response)
         return EXIT_FAILURE;
     }
 
-    if (send(client_socket, response->headers_buffer, response->headers_buffer_size, 0) == -1)
+    ssize_t sent = send(client_socket, response->headers_buffer, response->headers_buffer_size, 0);
+    if (sent == -1)
     {
         LOG_ERROR("failed to send headers: %s", strerror(errno));
         return EXIT_FAILURE;
