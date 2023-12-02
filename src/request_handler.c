@@ -60,9 +60,16 @@ static void handle_get(int client_socket, const struct request* request)
     {
         char filepath_buffer[FILEPATH_BUFFER_SIZE];
         getcwd(filepath_buffer, FILEPATH_BUFFER_SIZE);
-        join_paths_secure(filepath_buffer, FILEPATH_BUFFER_SIZE, filepath_buffer, request->uri);
-
-        respond_text_file(client_socket, filepath_buffer);
+        
+        if (join_paths_secure(filepath_buffer, FILEPATH_BUFFER_SIZE, filepath_buffer, request->uri) != EXIT_SUCCESS)
+        {
+            LOG_INFO("access denied for uri=%s", request->uri);
+            send_simple_response(client_socket, HTTP_1_1, HTTP_STATUS_FORBIDDEN, NULL);
+        }
+        else
+        {
+            respond_text_file(client_socket, filepath_buffer);
+        }
     }
 }
 
