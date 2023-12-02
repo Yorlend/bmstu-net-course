@@ -52,4 +52,4 @@ struct request {
  */
 parse_status_t parse_request(/* out */ struct request *request, /* var */ char* buffer);
 
-void handle_request(int client_socket_fd);
+void receive_request(int client_socket_fd);

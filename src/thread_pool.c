@@ -20,7 +20,7 @@ static void* worker_function(struct thread_pool *pool)
         if (get_request_job(&job) == EXIT_SUCCESS)
         {
             LOG_DEBUG("job received client_socket=%d thread_id=%d", job.client_socket, pthread_self());
-            handle_request(job.client_socket);
+            receive_request(job.client_socket);
         }
     }
     

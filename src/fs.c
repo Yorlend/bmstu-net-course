@@ -98,13 +98,18 @@ int send_base64_file(int socket_fd, const char *filename)
     return EXIT_SUCCESS;
 }
 
+bool file_exists(const char* filename)
+{
+    return access(filename, F_OK) == 0;
+}
+
 size_t text_file_length(const char* filename)
 {
     int fd = open(filename, O_RDONLY);
     if (fd == -1)
     {
         LOG_ERROR("open: %s", strerror(errno));
-        return EXIT_FAILURE;
+        return -1;
     }
     
     char buffer[TRANSFER_BUFFER_SIZE];
