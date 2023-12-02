@@ -24,8 +24,6 @@ void close_logger(void);
 
 void log_message(log_level_t level, const char* fmt, ...);
 
-#define __IS_VA_ARGS_EMTPY(...) (sizeof((char[]) { __VA_ARGS__ }) == 1)
-
 #define LOG(level, prefix, fmt, ...) \
     do { \
         time_t t = time(NULL); \
