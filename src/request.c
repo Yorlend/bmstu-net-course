@@ -1,3 +1,4 @@
+#include <errno.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,6 +7,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include "logger.h"
 #include "fs.h"
 #include "http_status_codes.h"
 #include "request.h"
@@ -37,7 +39,7 @@ static void respond_text_file(int client_socket, const char* path)
     
     send(client_socket, response_buffer, strlen(response_buffer), 0);
     if (send_text_file(client_socket, path) != EXIT_SUCCESS)
-        fprintf(stderr, "failed to send text file at %s\n", path);
+        LOG_ERROR("failed to send text file path=%s", path);
 }
 
 void handle_request(int client_socket_fd)
@@ -49,26 +51,28 @@ void handle_request(int client_socket_fd)
     int bytes_received = recv(client_socket_fd, request_buffer, REQUEST_BUFFER_SIZE, 0);
     if (bytes_received == -1)
     {
-        perror("recv");
+        LOG_ERROR("recv: %s", strerror(errno));
         exit(EXIT_FAILURE);
     }
     else if (bytes_received == 0)
     {
-        fprintf(stderr, "received 0 bytes\n");
+        LOG_WARNING("received 0 bytes");
         respond_error(client_socket_fd, HTTP_STATUS_BAD_REQUEST, "bad request");
     }
     else if (bytes_received == REQUEST_BUFFER_SIZE)
     {
-        fprintf(stderr, "received too many bytes\n");
+        LOG_WARNING("received too many bytes");
         respond_error(client_socket_fd, HTTP_STATUS_BAD_REQUEST, "bad request");        
     }
     else if ((parse_status = parse_request(&request, request_buffer)) != PARSE_SUCCESS)
     {
-        fprintf(stderr, "parse request failed with code: %d\n", parse_status);
+        LOG_WARNING("parse request failed with code: %d", parse_status);
         respond_error(client_socket_fd, HTTP_STATUS_BAD_REQUEST, "bad request");
     }
     else
     {
+        LOG_INFO("%s %s %s", request_method_str(request.method), request.uri, http_version_str(request.http_version));
+
         char filepath_buffer[FILEPATH_BUFFER_SIZE];
         getcwd(filepath_buffer, FILEPATH_BUFFER_SIZE);
         join_paths_secure(filepath_buffer, FILEPATH_BUFFER_SIZE, filepath_buffer, request.uri);

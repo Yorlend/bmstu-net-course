@@ -3,15 +3,69 @@
 #include <string.h>
 #include <stdio.h>
 
+#include "logger.h"
 #include "request.h"
 
-static void eat(char** buffer, size_t size)
+const char* http_version_str(http_version_t version)
+{
+    switch (version) {
+        case HTTP_1_0:
+            return "HTTP/1.0";
+        case HTTP_1_1:
+            return "HTTP/1.1";
+        case HTTP_2_0:
+            return "HTTP/2.0";
+        default:
+            LOG_ERROR("invalid http version: %d", version);
+            return "(unknown)";
+    }
+}
+
+const char* request_method_str(request_method_t method)
+{
+    switch (method) {
+        case OPTIONS:
+            return "OPTIONS";
+        case GET:
+            return "GET";
+        case HEAD:
+            return "HEAD";
+        case POST:
+            return "POST";
+        case PUT:
+            return "PUT";
+        case DELETE:
+            return "DELETE";
+        case TRACE:
+            return "TRACE";
+        case CONNECT:
+            return "CONNECT";
+        default:
+            LOG_ERROR("invalid request method: %d", method);
+            return "(unknown)";
+    }
+}
+
+/**
+ * Cuts of the first 'size' characters from the buffer
+ * 
+ * Inserts '\0' after 'size' characters. Increases
+ * buffer pointer so that it points after eaten string
+ */
+static inline void eat(char** buffer, size_t size)
 {
     (*buffer)[size] = '\0';
     *buffer += size + 1;
 }
 
-static int eat_sp(char** buffer)
+/**
+ * Skips space separators (spaces and tabs)
+ * 
+ * Buffer then points to the first non-space character
+ * 
+ * Returns EXIT_SUCCESS if space was eaten
+ */
+static inline int eat_sp(char** buffer)
 {
     int res = EXIT_FAILURE;
     while (**buffer == ' ' || **buffer == '\t')
@@ -22,7 +76,14 @@ static int eat_sp(char** buffer)
     return res;
 }
 
-static int eat_crlf(char** buffer)
+/**
+ * Skips CRLF character sequence in any order
+ * 
+ * Buffer then points to the first non-CRLF character
+ * 
+ * Returns EXIT_SUCCESS if CRLF was eaten
+ */
+static inline int eat_crlf(char** buffer)
 {
     int res = EXIT_FAILURE;
     while (**buffer == '\r' || **buffer == '\n')
@@ -34,6 +95,7 @@ static int eat_crlf(char** buffer)
 }
 
 /*
+    Request structure from RFC
 
     Request       = Request-Line                 ; Section 5.1
                     *(( general-header           ; Section 4.5
@@ -56,6 +118,19 @@ static int eat_crlf(char** buffer)
     Request-URI    = "*" | absoluteURI | abs_path | authority
 */
 
+/**
+ * This function parses the method from the request line in an HTTP request.
+ * The method is a token that represents the request method to be performed on the resource identified by the Request-URI.
+ * 
+ * The function takes in two arguments:
+ * - method: a pointer to the request_method_t enum where the parsed method will be stored.
+ * - buffer: a pointer to the character buffer that contains the request.
+ * 
+ * The function iterates over the buffer, comparing the current sequence of characters to the defined request methods (OPTIONS, GET, HEAD, etc).
+ * If it finds a match, it sets the method argument to the corresponding request_method_t value and increments the buffer pointer by the length of the matched method.
+ * 
+ * The function returns EXIT_SUCCESS if a method is successfully parsed and EXIT_FAILURE otherwise.
+ */
 static int parse_request_method(request_method_t* method, char** buffer)
 {
 #define CHECK_METHOD(method_name) \
@@ -80,6 +155,21 @@ static int parse_request_method(request_method_t* method, char** buffer)
     return EXIT_FAILURE;
 }
 
+/**
+ * This function parses the URI from the request line in an HTTP request.
+ * The URI is a string of characters that identifies a name or a resource on the Internet.
+ * 
+ * The function takes in two arguments:
+ * - uri: a pointer to the const char* where the parsed URI will be stored.
+ * - buffer: a pointer to the character buffer that contains the request.
+ * 
+ * The function assigns the start of the URI to the incoming pointer, then
+ * iterates over the buffer until it finds a whitespace character, incrementing the buffer pointer along the way.
+ * It then calls the `eat` function to consume the whitespace and any trailing null characters.
+ * 
+ * The function returns EXIT_SUCCESS if the URI is successfully parsed.
+ * TODO: handle the case where the URI is at the end of the buffer.
+ */
 static int parse_request_uri(const char** uri, char** buffer)
 {
     *uri = *buffer;

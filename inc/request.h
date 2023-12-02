@@ -8,6 +8,8 @@ typedef enum {
     HTTP_2_0,
 } http_version_t;
 
+const char* http_version_str(http_version_t version);
+
 typedef enum {
     OPTIONS,
     GET,
@@ -18,6 +20,8 @@ typedef enum {
     TRACE,
     CONNECT,
 } request_method_t;
+
+const char* request_method_str(request_method_t method);
 
 typedef enum {
     PARSE_SUCCESS,

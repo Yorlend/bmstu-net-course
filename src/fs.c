@@ -1,9 +1,12 @@
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
 #include <fcntl.h>
 
+#include "logger.h"
 #include "fs.h"
 
 #define TRANSFER_BUFFER_SIZE 4096
@@ -49,7 +52,7 @@ int send_text_file(int socket_fd, const char *filename)
     int fd = open(filename, O_RDONLY);
     if (fd == -1)
     {
-        perror("open");
+        LOG_ERROR("open: %s", strerror(errno));
         return EXIT_FAILURE;
     }
     
@@ -59,7 +62,7 @@ int send_text_file(int socket_fd, const char *filename)
     {
         if (send(socket_fd, buffer, len, 0) < 0)
         {
-            perror("send");
+            LOG_ERROR("send: %s", strerror(errno));
             close(fd);
             return EXIT_FAILURE;
         }
@@ -72,8 +75,10 @@ int send_text_file(int socket_fd, const char *filename)
 int send_base64_file(int socket_fd, const char *filename)
 {
     int fd = open(filename, O_RDONLY);
-    if (fd == -1)
+    if (fd == -1) {
+        LOG_ERROR("open: %s", strerror(errno));
         return EXIT_FAILURE;
+    }
     
     char buffer[DECODED_BUFFER_SIZE];
     char base64_buffer[TRANSFER_BUFFER_SIZE];
@@ -83,6 +88,7 @@ int send_base64_file(int socket_fd, const char *filename)
         len = base64_encode(base64_buffer, buffer, len);
         if (send(socket_fd, base64_buffer, len, 0) < 0)
         {
+            LOG_ERROR("send: %s", strerror(errno));
             close(fd);
             return EXIT_FAILURE;
         }
@@ -96,7 +102,10 @@ size_t text_file_length(const char* filename)
 {
     int fd = open(filename, O_RDONLY);
     if (fd == -1)
+    {
+        LOG_ERROR("open: %s", strerror(errno));
         return EXIT_FAILURE;
+    }
     
     char buffer[TRANSFER_BUFFER_SIZE];
     size_t res = 0, len;
@@ -113,7 +122,10 @@ size_t binary_file_length(const char* filename)
 {
     int fd = open(filename, O_RDONLY);
     if (fd == -1)
+    {
+        LOG_ERROR("open: %s", strerror(errno));
         return EXIT_FAILURE;
+    }
     
     char buffer[DECODED_BUFFER_SIZE];
     char base64_buffer[TRANSFER_BUFFER_SIZE];

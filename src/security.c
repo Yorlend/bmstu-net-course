@@ -1,12 +1,16 @@
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <string.h>
 
+#include "logger.h"
 #include "security.h"
 
 int join_paths_secure(char *destination, size_t buffer_size, const char* path1, const char* path2)
 {
     if (buffer_size < strlen(path1) + strlen(path2) + 1) {
+        LOG_WARNING("Buffer too small: %zu < %zu", buffer_size, strlen(path1) + strlen(path2) + 1);
         return EXIT_FAILURE;
     }
 

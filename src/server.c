@@ -1,5 +1,6 @@
 #include <arpa/inet.h>
 #include <errno.h>
+#include <string.h>
 #include <netinet/in.h>
 #include <signal.h>
 #include <stdbool.h>
@@ -10,6 +11,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include "logger.h"
 #include "server.h"
 #include "request_queue.h"
 #include "thread_pool.h"
@@ -25,7 +27,7 @@ static struct
 static void interrupt_handler(int sig)
 {
     server.running = false;
-    printf("server stopped\n");
+    LOG_INFO("server stopped");
 }
 
 void init_server(const char* ip_address, int port)
@@ -43,28 +45,28 @@ int run_server(void)
     // create socket and bind it to address
     int server_socket_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (server_socket_fd == -1) {
-        perror("socket");
+        LOG_ERROR("socket: %s", strerror(errno));
         return EXIT_FAILURE;
     }
 
     if (setsockopt(server_socket_fd, SOL_SOCKET, SO_REUSEADDR, &(int){1}, sizeof(int)) == -1) {
-        perror("setsockopt");
+        LOG_ERROR("setsockopt: %s", strerror(errno));
         return EXIT_FAILURE;
     }
 
     if (bind(server_socket_fd, (struct sockaddr*)&server.addr, sizeof(server.addr)) == -1) {
-        perror("bind");
+        LOG_ERROR("bind: %s", strerror(errno));
         return EXIT_FAILURE;
     }
 
     if (listen(server_socket_fd, server.queue_capacity) == -1) {
-        perror("listen");
+        LOG_ERROR("listen: %s", strerror(errno));
         return EXIT_FAILURE;
     }
 
     struct thread_pool* thread_pool = create_thread_pool(server.num_worker_threads);
     if (thread_pool == NULL) {
-        perror("create_thread_pool");
+        LOG_ERROR("create_thread_pool: %s", strerror(errno));
         close(server_socket_fd);
         return EXIT_FAILURE;
     }
@@ -72,7 +74,7 @@ int run_server(void)
     server.running = true;
     __sighandler_t old_handler = signal(SIGINT, interrupt_handler);
 
-    printf("server started at %s:%d\n", inet_ntoa(server.addr.sin_addr), ntohs(server.addr.sin_port));
+    LOG_INFO("server started at %s:%d", inet_ntoa(server.addr.sin_addr), ntohs(server.addr.sin_port));
 
     int ret = EXIT_SUCCESS;
 
@@ -94,10 +96,12 @@ int run_server(void)
             int client_socket = accept(server_socket_fd, NULL, NULL);
             if (client_socket == -1)
             {
-                perror("accept");
+                LOG_ERROR("accept: %s", strerror(errno));
                 ret = EXIT_FAILURE;
                 break;
             }
+
+            LOG_DEBUG("new client connected: socket=%d", client_socket);
 
             // post request job for thread pool
             post_request_job((struct request_job){

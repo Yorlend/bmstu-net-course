@@ -11,7 +11,7 @@ build/%.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 run:
-	./build/app
+	cd static && ../build/app
 
 clean:
 	rm -rf build

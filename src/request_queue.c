@@ -1,8 +1,11 @@
+#include <errno.h>
 #include <pthread.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
+#include "logger.h"
 #include "request_queue.h"
 
 struct job_list_node
@@ -20,7 +23,7 @@ inline static void lock(void)
 {
     if (pthread_mutex_lock(&mutex) != 0)
     {
-        perror("pthread_mutex_lock");
+        LOG_ERROR("pthread_mutex_lock: %s", strerror(errno));
         exit(EXIT_FAILURE);
     }
 }
@@ -29,7 +32,7 @@ inline static void unlock(void)
 {
     if (pthread_mutex_unlock(&mutex) != 0)
     {
-        perror("pthread_mutex_unlock");
+        LOG_ERROR("pthread_mutex_unlock: %s", strerror(errno));
         exit(EXIT_FAILURE);
     }
 }
@@ -38,7 +41,7 @@ inline static void wakeup(void)
 {
     if (pthread_cond_signal(&cond) != 0)
     {
-        perror("pthread_cond_signal");
+        LOG_ERROR("pthread_cond_signal: %s", strerror(errno));
         exit(EXIT_FAILURE);
     }
 }
@@ -47,7 +50,7 @@ inline static void wakeup_all(void)
 {
     if (pthread_cond_broadcast(&cond) != 0)
     {
-        perror("pthread_cond_broadcast");
+        LOG_ERROR("pthread_cond_broadcast: %s", strerror(errno));
         exit(EXIT_FAILURE);
     }
 }
@@ -56,7 +59,7 @@ inline static void wait(void)
 {
     if (pthread_cond_wait(&cond, &mutex) != 0)
     {
-        perror("pthread_cond_wait");
+        LOG_ERROR("pthread_cond_wait: %s", strerror(errno));
         exit(EXIT_FAILURE);
     }
 }
@@ -66,7 +69,7 @@ int post_request_job(struct request_job job)
     struct job_list_node* node = calloc(1, sizeof(struct job_list_node));
     if (node == NULL)
     {
-        perror("calloc");
+        LOG_ERROR("calloc: %s", strerror(errno));
         return EXIT_FAILURE;
     }
     node->job = job;
@@ -79,6 +82,8 @@ int post_request_job(struct request_job job)
     *last = node;
     wakeup();
     unlock();
+
+    LOG_DEBUG("job posted client_socket=%d", job.client_socket);
     return EXIT_SUCCESS;
 }
 
@@ -94,6 +99,8 @@ void free_all_request_jobs(void)
     queue_destroyed = true;
     wakeup_all();
     unlock();
+
+    LOG_DEBUG("request jobs queue destroyed");
 }
 
 int get_request_job(struct request_job* job)
