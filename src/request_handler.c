@@ -10,57 +10,45 @@
 #include "fs.h"
 #include "security.h"
 #include "request_handler.h"
+#include "response.h"
 
 #define FILEPATH_BUFFER_SIZE 512
 #define RESPONSE_BUFFER_SIZE 4096
 
-void respond_error(int client_socket, int status, const char* message)
+static int text_file_writer(int client_socket, void* data)
 {
-    char response_buffer[RESPONSE_BUFFER_SIZE];
-    snprintf(response_buffer, RESPONSE_BUFFER_SIZE,
-        "HTTP/1.1 %d %s\r\n"
-        "Content-Length: %d\r\n"
-        "\r\n"
-        "%s", status, message, strlen(message), message);
-    
-    send(client_socket, response_buffer, strlen(response_buffer), 0);
+    return send_text_file(client_socket, (const char*)data);
 }
 
 static void respond_text_file(int client_socket, const char* path)
 {
     if (!file_exists(path))
-        respond_error(client_socket, HTTP_STATUS_NOT_FOUND, "Not Found");
+        send_simple_response(client_socket, HTTP_1_1, HTTP_STATUS_NOT_FOUND, NULL);
     else
     {
-        char response_buffer[RESPONSE_BUFFER_SIZE];
-        snprintf(response_buffer, RESPONSE_BUFFER_SIZE,
-            "HTTP/1.1 %d\r\n"
-            "\r\n", HTTP_STATUS_OK);
+        struct response response = create_response(HTTP_1_1, HTTP_STATUS_OK);
+        set_body_writer(&response, text_file_writer, (char*)path);
         
-        send(client_socket, response_buffer, strlen(response_buffer), 0);
-        if (send_text_file(client_socket, path) != EXIT_SUCCESS)
-            LOG_ERROR("failed to send text file path=%s", path);
+        if (send_response(client_socket, &response) != EXIT_SUCCESS)
+            LOG_ERROR("failed to send text file at path=%s", path);
     }
 }
 
 static void respond_file_head(int client_socket, const char* path)
 {
     if (!file_exists(path))
-        respond_error(client_socket, HTTP_STATUS_NOT_FOUND, "Not Found");
+        send_simple_response(client_socket, HTTP_1_1, HTTP_STATUS_NOT_FOUND, NULL);
     else
     {
-        char response_buffer[RESPONSE_BUFFER_SIZE];
-        snprintf(response_buffer, RESPONSE_BUFFER_SIZE,
-            "HTTP/1.1 %d\r\n"
-            "Content-Length: %d\r\n"
-            "\r\n", HTTP_STATUS_OK, text_file_length(path));
+        struct response response = create_response(HTTP_1_1, HTTP_STATUS_OK);
+        print_header(&response, "Content-Length", text_file_length(path));
         
-        if (send(client_socket, response_buffer, strlen(response_buffer), 0) == -1)
-            LOG_ERROR("send: %s", strerror(errno));
+        if (send_response(client_socket, &response) != EXIT_SUCCESS)
+            LOG_ERROR("failed to send head of file at path=%s", path);
     }
 }
 
-int handle_request(int client_socket, struct request request)
+void handle_request(int client_socket, struct request request)
 {
     LOG_INFO("%s %s %s", request_method_str(request.method), request.uri, http_version_str(request.http_version));
 
@@ -79,8 +67,6 @@ int handle_request(int client_socket, struct request request)
     
     default:
         LOG_INFO("unsupported method: %s", request_method_str(request.method));
-        respond_error(client_socket, HTTP_STATUS_METHOD_NOT_ALLOWED, "method not allowed");
+        send_simple_response(client_socket, HTTP_1_1, HTTP_STATUS_METHOD_NOT_ALLOWED, NULL);
     }
-
-    return EXIT_SUCCESS;
 }

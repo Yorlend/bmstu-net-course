@@ -10,6 +10,7 @@
 #include "logger.h"
 #include "http_status_codes.h"
 #include "request.h"
+#include "response.h"
 #include "request_handler.h"
 
 #define REQUEST_BUFFER_SIZE 4096
@@ -29,17 +30,17 @@ void receive_request(int client_socket_fd)
     else if (bytes_received == 0)
     {
         LOG_WARNING("received 0 bytes");
-        respond_error(client_socket_fd, HTTP_STATUS_BAD_REQUEST, "bad request");
+        send_simple_response(client_socket_fd, HTTP_1_1, HTTP_STATUS_BAD_REQUEST, NULL);
     }
     else if (bytes_received == REQUEST_BUFFER_SIZE)
     {
         LOG_WARNING("received too many bytes");
-        respond_error(client_socket_fd, HTTP_STATUS_BAD_REQUEST, "bad request");        
+        send_simple_response(client_socket_fd, HTTP_1_1, HTTP_STATUS_BAD_REQUEST, NULL);        
     }
     else if ((parse_status = parse_request(&request, request_buffer)) != PARSE_SUCCESS)
     {
         LOG_WARNING("parse request failed with code: %d", parse_status);
-        respond_error(client_socket_fd, HTTP_STATUS_BAD_REQUEST, "bad request");
+        send_simple_response(client_socket_fd, HTTP_1_1, HTTP_STATUS_BAD_REQUEST, NULL);
     }
     else
     {
