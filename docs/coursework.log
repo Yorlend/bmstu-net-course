@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.4)  26 DEC 2023 11:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.4)  26 DEC 2023 11:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1469,22 +1469,22 @@ Underfull \hbox (badness 10000) in alignment at lines 13--13
 {/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t2a.enc} </usr/local/texlive/2023/texmf-dist/tex/latex/bmstu/bmstu-logo.pdf>]
 
 LaTeX Font Warning: Font shape `T2A/cmr/m/n' in size <16> not available
-(Font)              size <17.28> substituted on input line 15.
+(Font)              size <17.28> substituted on input line 17.
 
 
 LaTeX Font Warning: Font shape `T2A/cmr/bx/n' in size <16> not available
-(Font)              size <17.28> substituted on input line 15.
+(Font)              size <17.28> substituted on input line 17.
 
 (./coursework.toc)
 \tf@toc=\write6
 \openout6 = `coursework.toc'.
 
- [2
+ [3
 
 ]
 \openout2 = `03-introduction.aux'.
 
- (./03-introduction.tex) [3
+ (./03-introduction.tex) [4
 
 
 ]
@@ -1505,7 +1505,7 @@ File: inc/img/socket2.pdf Graphic file (type pdf)
 <use inc/img/socket2.pdf>
 Package pdftex.def Info: inc/img/socket2.pdf  used on input line 20.
 (pdftex.def)             Requested size: 338.58632pt x 96.23036pt.
- [4
+ [5
 
 
 
@@ -1516,7 +1516,7 @@ File: inc/img/syscalls.pdf Graphic file (type pdf)
 <use inc/img/syscalls.pdf>
 Package pdftex.def Info: inc/img/syscalls.pdf  used on input line 29.
 (pdftex.def)             Requested size: 435.32422pt x 488.54115pt.
- [5 <./inc/img/syscalls.pdf>] [6
+ [6 <./inc/img/syscalls.pdf>] [7
 
 ]
 <inc/img/tcp.png, id=168, 428.60126pt x 562.1pt>
@@ -1524,9 +1524,9 @@ File: inc/img/tcp.png Graphic file (type png)
 <use inc/img/tcp.png>
 Package pdftex.def Info: inc/img/tcp.png  used on input line 53.
 (pdftex.def)             Requested size: 314.40001pt x 412.32802pt.
- [7
+ [8
 
- <./inc/img/tcp.png>]) [8
+ <./inc/img/tcp.png>]) [9
 
 ]
 \openout2 = `05-design.aux'.
@@ -1543,7 +1543,7 @@ File: inc/img/http.pdf Graphic file (type pdf)
 <use inc/img/http.pdf>
 Package pdftex.def Info: inc/img/http.pdf  used on input line 21.
 (pdftex.def)             Requested size: 386.95897pt x 231.29958pt.
-[9
+[10
 
 
 
@@ -1554,7 +1554,7 @@ File: inc/img/main.pdf Graphic file (type pdf)
 <use inc/img/main.pdf>
 Package pdftex.def Info: inc/img/main.pdf  used on input line 32.
 (pdftex.def)             Requested size: 101.57959pt x 519.31047pt.
- [10
+ [11
 
  <./inc/img/main.pdf>]
 <inc/img/parsing.pdf, id=228, 230.7822pt x 645.37106pt>
@@ -1562,7 +1562,7 @@ File: inc/img/parsing.pdf Graphic file (type pdf)
 <use inc/img/parsing.pdf>
 Package pdftex.def Info: inc/img/parsing.pdf  used on input line 43.
 (pdftex.def)             Requested size: 193.47578pt x 541.04446pt.
- [11
+ [12
 
  <./inc/img/parsing.pdf>]
 <inc/img/GET.pdf, id=244, 513.83968pt x 443.7378pt>
@@ -1570,7 +1570,7 @@ File: inc/img/GET.pdf Graphic file (type pdf)
 <use inc/img/GET.pdf>
 Package pdftex.def Info: inc/img/GET.pdf  used on input line 54.
 (pdftex.def)             Requested size: 435.32422pt x 375.94661pt.
-) [12
+) [13
 
  <./inc/img/GET.pdf>]
 \openout2 = `06-implementation.aux'.
@@ -1585,7 +1585,7 @@ File: koi8-r.def 2022/06/11 v1.0e Input encoding file
 File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-koi8-r.def
 File: se-koi8-r.def 2019/11/29 v1.12 stringenc: KOI8-R
-) [13
+) [14
 
 
 
@@ -1598,17 +1598,17 @@ File: koi8-r.def 2022/06/11 v1.0e Input encoding file
 Package csquotes Info: Input encoding change on input line 29.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/cyrillic/koi8-r.def
 File: koi8-r.def 2022/06/11 v1.0e Input encoding file
-) [14
+) [15
 
-] [15] [16]
+] [16] [17]
 Package csquotes Info: Input encoding change on input line 35.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/cyrillic/koi8-r.def
 File: koi8-r.def 2022/06/11 v1.0e Input encoding file
-) [17] [18]
+) [18] [19]
 Package csquotes Info: Input encoding change on input line 41.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/cyrillic/koi8-r.def
 File: koi8-r.def 2022/06/11 v1.0e Input encoding file
-) [19] [20] [21]) [22]
+) [20] [21] [22]) [23]
 \openout2 = `07-research.aux'.
 
  (./07-research.tex
@@ -1616,7 +1616,7 @@ File: koi8-r.def 2022/06/11 v1.0e Input encoding file
 Package csquotes Info: Input encoding change on input line 11.
 (/usr/local/texlive/2023/texmf-dist/tex/latex/cyrillic/koi8-r.def
 File: koi8-r.def 2022/06/11 v1.0e Input encoding file
-) [23
+) [24
 
 
 
@@ -1627,22 +1627,22 @@ File: inc/img/analysis.png Graphic file (type png)
 <use inc/img/analysis.png>
 Package pdftex.def Info: inc/img/analysis.png  used on input line 22.
 (pdftex.def)             Requested size: 386.95897pt x 292.75948pt.
-) [24
+) [25
 
  <./inc/img/analysis.png>]
 \openout2 = `08-conclusion.aux'.
 
- (./08-conclusion.tex) [25
+ (./08-conclusion.tex) [26
 
 
 
 
 ]
-Underfull \hbox (badness 2875) in paragraph at lines 24--24
+Underfull \hbox (badness 2875) in paragraph at lines 26--26
 []\T2A/cmr/m/it/14.4 (+20) Putro Z. P.\T2A/cmr/m/n/14.4 (+20) , \T2A/cmr/m/it/14.4 (+20) Supono R. A. \T2A/cmr/m/n/14.4 (+20) Comparison Analysis of Apache and
  []
 
-[26
+[27
 
 
 
@@ -1656,7 +1656,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{appendixchapte
 l.2 	\chapter{}
                
 ПРИЛОЖЕНИЕ \CYRA .
-) [27
+) [28
 
 
 ] 
@@ -1679,14 +1679,14 @@ Package logreq Info: Writing requests to 'coursework.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
  51004 strings out of 474928
- 1105138 string characters out of 5759533
- 2295794 words of memory out of 5000000
+ 1105139 string characters out of 5759533
+ 2295797 words of memory out of 5000000
  71124 multiletter control sequences out of 15000+600000
  581477 words of font info for 145 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  126i,19n,129p,1297b,3209s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1440.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti2074.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1440.pfb>
-Output written on coursework.pdf (27 pages, 619540 bytes).
+Output written on coursework.pdf (27 pages, 621669 bytes).
 PDF statistics:
  855 PDF objects out of 1000 (max. 8388607)
  772 compressed objects within 8 object streams

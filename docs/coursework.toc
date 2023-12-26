@@ -1,17 +1,17 @@
 \babel@toc {russian}{}\relax 
-\contentsline {chapter}{ВВЕДЕНИЕ}{3}{chapter*.3}%
-\contentsline {chapter}{\numberline {1}Аналитический раздел}{4}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Cокеты BSD}{4}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Стек протоколов TCP/IP}{6}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Протокол HTTP}{7}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}Методы HTTP}{8}{subsection.1.3.1}%
-\contentsline {chapter}{\numberline {2}Конструкторский раздел}{9}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Пул потоков}{9}{section.2.1}%
-\contentsline {chapter}{\numberline {3}Технологический раздел}{13}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Выбор средств разработки}{13}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Сборка проекта}{13}{section.3.2}%
-\contentsline {chapter}{\numberline {4}Исследовательский раздел}{23}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Анализ производительности программного обеспечения}{23}{section.4.1}%
-\contentsline {chapter}{ЗАКЛЮЧЕНИЕ}{25}{chapter*.13}%
-\contentsline {chapter}{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}{26}{chapter*.14}%
-\contentsline {chapter}{ПРИЛОЖЕНИЕ \numberline {\CYRA }}{27}{appendix.1.A}%
+\contentsline {chapter}{ВВЕДЕНИЕ}{4}{chapter*.3}%
+\contentsline {chapter}{\numberline {1}Аналитический раздел}{5}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Cокеты BSD}{5}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Стек протоколов TCP/IP}{7}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Протокол HTTP}{8}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Методы HTTP}{9}{subsection.1.3.1}%
+\contentsline {chapter}{\numberline {2}Конструкторский раздел}{10}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Пул потоков}{10}{section.2.1}%
+\contentsline {chapter}{\numberline {3}Технологический раздел}{14}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Выбор средств разработки}{14}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Сборка проекта}{14}{section.3.2}%
+\contentsline {chapter}{\numberline {4}Исследовательский раздел}{24}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Анализ производительности программного обеспечения}{24}{section.4.1}%
+\contentsline {chapter}{ЗАКЛЮЧЕНИЕ}{26}{chapter*.13}%
+\contentsline {chapter}{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}{27}{chapter*.14}%
+\contentsline {chapter}{ПРИЛОЖЕНИЕ \numberline {\CYRA }}{28}{appendix.1.A}%
