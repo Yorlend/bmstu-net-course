@@ -1,0 +1,232 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{yeager1996web}{book}{}
+      \name{author}{2}{}{%
+        {{hash=c466faf619605534797caed339db26ab}{%
+           family={Yeager},
+           familyi={Y\bibinitperiod},
+           given={Nancy\bibnamedelima J},
+           giveni={N\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=8fde6d2aa4c00902e04cb4a467072932}{%
+           family={McGrath},
+           familyi={M\bibinitperiod},
+           given={Robert\bibnamedelima E},
+           giveni={R\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Morgan Kaufmann}%
+      }
+      \strng{namehash}{11bcfac20207faf9e899ca7c2a572a00}
+      \strng{fullhash}{11bcfac20207faf9e899ca7c2a572a00}
+      \strng{bibnamehash}{11bcfac20207faf9e899ca7c2a572a00}
+      \strng{authorbibnamehash}{11bcfac20207faf9e899ca7c2a572a00}
+      \strng{authornamehash}{11bcfac20207faf9e899ca7c2a572a00}
+      \strng{authorfullhash}{11bcfac20207faf9e899ca7c2a572a00}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Web server technology}
+      \field{year}{1996}
+    \endentry
+    \entry{touch1998analysis}{article}{}
+      \name{author}{3}{}{%
+        {{hash=8e08cd245f590e14e89ca3f66b6246c4}{%
+           family={Touch},
+           familyi={T\bibinitperiod},
+           given={Joe},
+           giveni={J\bibinitperiod}}}%
+        {{hash=388b6a873d916e081df36af6bb379513}{%
+           family={Heidemann},
+           familyi={H\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=fb64084065efc78474c0bcea76f8416b}{%
+           family={Obraczka},
+           familyi={O\bibinitperiod},
+           given={Katia},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{2bc63964aab5e2d9ea8b0a3087802c03}
+      \strng{fullhash}{2bc63964aab5e2d9ea8b0a3087802c03}
+      \strng{bibnamehash}{2bc63964aab5e2d9ea8b0a3087802c03}
+      \strng{authorbibnamehash}{2bc63964aab5e2d9ea8b0a3087802c03}
+      \strng{authornamehash}{2bc63964aab5e2d9ea8b0a3087802c03}
+      \strng{authorfullhash}{2bc63964aab5e2d9ea8b0a3087802c03}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{URL: http://www. isi. edu/touch/pubs/http-perf96/>, ISI Research Report ISI/RR-98-463,(original report dated Aug. 1996), USC/Information Sciences Institute}
+      \field{title}{Analysis of HTTP performance}
+      \field{year}{1998}
+    \endentry
+    \entry{putro2022comparison}{article}{}
+      \name{author}{2}{}{%
+        {{hash=56146f82f38f012adf752d09efbc8125}{%
+           family={Putro},
+           familyi={P\bibinitperiod},
+           given={Zuki\bibnamedelima Pristiantoro},
+           giveni={Z\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=b70c58da81831dd02e5dd13cdf377034}{%
+           family={Supono},
+           familyi={S\bibinitperiod},
+           given={Riza\bibnamedelima Adrianti},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{2100072f46e525130c70cf83c174ca36}
+      \strng{fullhash}{2100072f46e525130c70cf83c174ca36}
+      \strng{bibnamehash}{2100072f46e525130c70cf83c174ca36}
+      \strng{authorbibnamehash}{2100072f46e525130c70cf83c174ca36}
+      \strng{authornamehash}{2100072f46e525130c70cf83c174ca36}
+      \strng{authorfullhash}{2100072f46e525130c70cf83c174ca36}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{internalsortvolume}{7}
+      \field{journaltitle}{International Research Journal of Advanced Engineering and Science}
+      \field{title}{Comparison Analysis of Apache and Nginx Webserver Load Balancing on Proxmox VE in Supporting Server Performance}
+      \field{year}{2022}
+      \field{number}{3}
+      \range{number}{1}
+      \field{pages}{144\bibrangedash 151}
+      \range{pages}{8}
+      \field{volume}{7}
+      \range{volume}{1}
+    \endentry
+    \entry{tian2023building}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=3ef2a786bc1eb6ef1798ed507bdeea89}{%
+           family={Tian},
+           familyi={T\bibinitperiod},
+           given={Yu-Chu},
+           giveni={Y\bibinithyphendelim C\bibinitperiod}}}%
+        {{hash=8b7cfd8a449c694ae68dfb629a88229e}{%
+           family={Gao},
+           familyi={G\bibinitperiod},
+           given={Jing},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{369a0c526bdb2f69aab9f0c5bbd8f1fc}
+      \strng{fullhash}{369a0c526bdb2f69aab9f0c5bbd8f1fc}
+      \strng{bibnamehash}{369a0c526bdb2f69aab9f0c5bbd8f1fc}
+      \strng{authorbibnamehash}{369a0c526bdb2f69aab9f0c5bbd8f1fc}
+      \strng{authornamehash}{369a0c526bdb2f69aab9f0c5bbd8f1fc}
+      \strng{authorfullhash}{369a0c526bdb2f69aab9f0c5bbd8f1fc}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Network Analysis and Architecture}
+      \field{title}{Building TCP/IP Socket Applications}
+      \field{year}{2023}
+      \field{pages}{501\bibrangedash 540}
+      \range{pages}{40}
+    \endentry
+    \entry{stivens}{book}{}
+      \name{author}{1}{}{%
+        {{hash=400003a0520aa4f5b935a18b33dace7a}{%
+           family={Вильям},
+           familyi={В\bibinitperiod},
+           given={Стивенс},
+           giveni={С\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {М.: Питер}%
+      }
+      \strng{namehash}{400003a0520aa4f5b935a18b33dace7a}
+      \strng{fullhash}{400003a0520aa4f5b935a18b33dace7a}
+      \strng{bibnamehash}{400003a0520aa4f5b935a18b33dace7a}
+      \strng{authorbibnamehash}{400003a0520aa4f5b935a18b33dace7a}
+      \strng{authornamehash}{400003a0520aa4f5b935a18b33dace7a}
+      \strng{authorfullhash}{400003a0520aa4f5b935a18b33dace7a}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{UNIX: Взаимодействие Процессов}
+      \field{year}{2003}
+    \endentry
+    \entry{hunt2002tcp}{book}{}
+      \name{author}{1}{}{%
+        {{hash=8efe1af736ebb55c9fda89c99aa7b0eb}{%
+           family={Hunt},
+           familyi={H\bibinitperiod},
+           given={Craig},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {" O'Reilly Media, Inc."}%
+      }
+      \strng{namehash}{8efe1af736ebb55c9fda89c99aa7b0eb}
+      \strng{fullhash}{8efe1af736ebb55c9fda89c99aa7b0eb}
+      \strng{bibnamehash}{8efe1af736ebb55c9fda89c99aa7b0eb}
+      \strng{authorbibnamehash}{8efe1af736ebb55c9fda89c99aa7b0eb}
+      \strng{authornamehash}{8efe1af736ebb55c9fda89c99aa7b0eb}
+      \strng{authorfullhash}{8efe1af736ebb55c9fda89c99aa7b0eb}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{internalsortvolume}{2}
+      \field{title}{TCP/IP network administration}
+      \field{year}{2002}
+      \field{volume}{2}
+      \range{volume}{1}
+    \endentry
+    \entry{gourley2002http}{book}{}
+      \name{author}{2}{}{%
+        {{hash=d24b5e8a5cf8350db91a3a19a983ec5a}{%
+           family={Gourley},
+           familyi={G\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=3cf16bef4043f8f1806b867adc149754}{%
+           family={Totty},
+           familyi={T\bibinitperiod},
+           given={Brian},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {" O'Reilly Media, Inc."}%
+      }
+      \strng{namehash}{934ad4be42742164a6c8abfda121994c}
+      \strng{fullhash}{934ad4be42742164a6c8abfda121994c}
+      \strng{bibnamehash}{934ad4be42742164a6c8abfda121994c}
+      \strng{authorbibnamehash}{934ad4be42742164a6c8abfda121994c}
+      \strng{authornamehash}{934ad4be42742164a6c8abfda121994c}
+      \strng{authorfullhash}{934ad4be42742164a6c8abfda121994c}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{HTTP: the definitive guide}
+      \field{year}{2002}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
